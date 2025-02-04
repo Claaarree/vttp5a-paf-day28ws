@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.Fields;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.aggregation.LimitOperation;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
@@ -94,10 +93,10 @@ public class BoardGameRepository {
     public List<Document> getHighestLowestGames(String order) {
         SortOperation sortByRanking = Aggregation.sort(Sort.by("rating"));
         if(order.equalsIgnoreCase("highest")){
-            sortByRanking.and(Direction.ASC, "rating");
+            sortByRanking.and(Direction.DESC, "rating");
             System.out.println("in highest");
         } else{
-            sortByRanking.and(Direction.DESC, "rating");
+            sortByRanking.and(Direction.ASC, "rating");
             System.out.println("in lowest");
 
         }
