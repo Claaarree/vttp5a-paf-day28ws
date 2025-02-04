@@ -23,6 +23,13 @@ public class BoardGameRestController {
         return checkJObject(jObject);
     }
 
+    @GetMapping(path = "/games/{order}", produces = "application/json")
+    public ResponseEntity<String> getHighestLowestGames(@PathVariable String order) {
+        JsonObject jObject = boardGameService.getHighestLowestGames(order);
+
+        return ResponseEntity.ok().body(jObject.toString());
+    }
+
     public ResponseEntity<String> checkJObject(JsonObject jObject) {
         if (jObject.containsKey("error")){
             return ResponseEntity.badRequest().body(jObject.toString());
